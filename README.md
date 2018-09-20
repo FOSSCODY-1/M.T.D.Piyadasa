@@ -1,2 +1,2 @@
-# M.T.D.Piyadasa
+Graph Implementation using C
 [Product Name]
