@@ -1,16 +1,20 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include "queue.h"
 
 struct node_edge{
 	int data;
 	struct node_edge *nextedge;
+	int status;
 };
 struct node_vertex{
 	int data;
 	struct node_edge *link;
 	struct node_vertex *nextvertex;
+	int status;
 };
 struct node_vertex *head=NULL;
+
 
 struct node_vertex *create_v(struct node_vertex* ptr,int m){
 	if(ptr==NULL){
@@ -26,6 +30,9 @@ struct node_vertex *create_v(struct node_vertex* ptr,int m){
 	}
 	
 }
+
+
+
 struct node_edge *create_e(struct node_vertex *ptr,int x,int y){
 //	printf("wawawa");
 	while(ptr->data!=x){
@@ -51,6 +58,9 @@ struct node_edge *create_e(struct node_vertex *ptr,int x,int y){
 		ptr->link=newedge;
 	}	
 }
+
+
+
 void print(struct node_vertex *ptr){
 	struct node_edge *edge;
 	printf("Vertex\t        Edge\n\n");
@@ -67,6 +77,9 @@ void print(struct node_vertex *ptr){
 	}
 	
 }
+
+
+
 void delete_edge(struct node_vertex *ptr,int x,int y){
 	while(ptr->data!=x){
 		ptr=ptr->nextvertex;
@@ -86,10 +99,68 @@ void delete_edge(struct node_vertex *ptr,int x,int y){
 	free(preptr);	
 }
 
+
+int statechange(int m){
+	struct node_vertex *ptr=head;
+	while(ptr!=NULL){
+		struct node_edge *ptr2=ptr->link;
+		while(ptr2!=NULL){
+			if(ptr2->data==m){
+				ptr2->status=1;
+			}
+			ptr2=ptr2->nextedge;
+		}
+		ptr=ptr->nextvertex;
+	}	
+}
+
+
+void bfs(int n){
+	int a;
+//	printf("bishkaaaw");
+	struct node_vertex *ptr=head;
+	struct node_edge *ptr2;
+	while(ptr->data!=n){
+		ptr=ptr->nextvertex;
+	}
+//	printf("bishkaaaw");
+	ptr->status=1;
+	enqueue(ptr->data);
+	statechange(ptr->data);
+//	printf("bishkaaaw");
+	ptr2=ptr->link;
+	while(ptr2!=NULL){
+		ptr2->status=1;
+		enqueue(ptr2->data);
+		statechange(ptr2->data);
+		ptr2=ptr2->nextedge;
+	}
+	printf("\n\nBFS: %d ",dequeue());
+//	a=dequeue();
+	while(!isempty()){
+		a=dequeue();
+		printf("%d ",a);
+		struct node_vertex *ptr3=head;
+		while(ptr3->data!=a){
+			ptr3=ptr3->nextvertex;
+		}
+		struct node_edge *ptr4=ptr3->link;
+		while(ptr4!=NULL){
+			if(ptr4->status==0){
+				enqueue(ptr4->data);
+			}
+			ptr4=ptr4->nextedge;
+		}
+	}
+	printf("\n\n");	
+}
+
+
+
 int main(){
-	int x,y,v,i,j,s,q,k,l;
+	int x,y,v,i,j,s,q,k,l,m;
 	while(1){
-		printf("1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Exit\n");
+		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.BFS\n7.Exit\n");
 		printf("\n\nEnter Selection: ");
 		scanf("%d",&s);
 	
@@ -102,7 +173,7 @@ int main(){
 					head=create_v(head,i);
 				}
 				while(1){
-					printf("Enter edge v1 v2(enter 0 0 to end): ");
+					printf("Enter edge v1--->v2(enter 0 0 to end): ");
 					scanf("%d %d",&x,&y);
 					if(x==0||y==0){
 						break;
@@ -142,6 +213,11 @@ int main(){
 				delete_edge(head,k,l);
 				break;
 			case 6:
+				printf("Enter starting Edge: ");
+				scanf("%d",&m);
+				bfs(m);
+				break;
+			case 7:
 				exit(0);
 		}
 	}
