@@ -16,9 +16,10 @@ struct node_vertex{
 struct node_vertex *head=NULL;
 
 
+//Function to create a vertex
+
 struct node_vertex *create_v(struct node_vertex* ptr,int m){
 	if(ptr==NULL){
-//		printf("testing...");
 		struct node_vertex *newvertex;
 		newvertex=(struct node_vertex*)malloc(sizeof(struct node_vertex));
 		newvertex->data=m;
@@ -32,15 +33,14 @@ struct node_vertex *create_v(struct node_vertex* ptr,int m){
 }
 
 
+//Function to create an edge
 
 struct node_edge *create_e(struct node_vertex *ptr,int x,int y){
-//	printf("wawawa");
 	while(ptr->data!=x){
 		ptr=ptr->nextvertex;
 	}
 	struct node_edge *edge=ptr->link;
 	if(edge!=NULL){
-//		printf("eyow");
 		while(edge->nextedge!=NULL){
 			edge=edge->nextedge;
 		}
@@ -50,7 +50,6 @@ struct node_edge *create_e(struct node_vertex *ptr,int x,int y){
 		newedge->nextedge=NULL;
 		edge->nextedge=newedge;	
 	}else{
-//		printf("meowww");
 		struct node_edge *newedge;
 		newedge=(struct node_edge*)malloc(sizeof(struct node_edge));
 		newedge->data=y;
@@ -60,6 +59,7 @@ struct node_edge *create_e(struct node_vertex *ptr,int x,int y){
 }
 
 
+//Function to print the graph
 
 void print(struct node_vertex *ptr){
 	struct node_edge *edge;
@@ -79,6 +79,7 @@ void print(struct node_vertex *ptr){
 }
 
 
+//Function to delete an edge
 
 void delete_edge(struct node_vertex *ptr,int x,int y){
 	while(ptr->data!=x){
@@ -99,6 +100,7 @@ void delete_edge(struct node_vertex *ptr,int x,int y){
 	free(preptr);	
 }
 
+//Function to mark the identified nodes in Breadth First Traversal
 
 int statechange(int m){
 	struct node_vertex *ptr=head;
@@ -115,19 +117,18 @@ int statechange(int m){
 }
 
 
-void bfs(int n){
+//Breadth First Traversal
+
+void BFT(int n){
 	int a;
-//	printf("bishkaaaw");
 	struct node_vertex *ptr=head;
 	struct node_edge *ptr2;
 	while(ptr->data!=n){
 		ptr=ptr->nextvertex;
 	}
-//	printf("bishkaaaw");
 	ptr->status=1;
 	enqueue(ptr->data);
 	statechange(ptr->data);
-//	printf("bishkaaaw");
 	ptr2=ptr->link;
 	while(ptr2!=NULL){
 		ptr2->status=1;
@@ -135,8 +136,7 @@ void bfs(int n){
 		statechange(ptr2->data);
 		ptr2=ptr2->nextedge;
 	}
-	printf("\n\nBFS: %d ",dequeue());
-//	a=dequeue();
+	printf("\n\nBFT: %d ",dequeue());
 	while(!isempty()){
 		a=dequeue();
 		printf("%d ",a);
@@ -156,6 +156,8 @@ void bfs(int n){
 }
 
 
+//Function to delete a vertex
+
 void delete_vertex(int n){
 	struct node_vertex *ptr=head;
 	struct node_vertex *ptr2;
@@ -172,7 +174,6 @@ void delete_vertex(int n){
 	free(ptr);
 	struct node_vertex *ptr3=head;
 	while(ptr3!=NULL){
-//		printf("bam!!!!");
 		struct node_edge *ptr4=ptr3->link;
 		struct node_edge *ptr5;
 		if(ptr4->data==n){
@@ -180,8 +181,6 @@ void delete_vertex(int n){
 			free(ptr4);
 		}else{
 			while(ptr4!=NULL){
-//				ptr5=ptr4;
-//				ptr4=ptr4->nextedge;
 				if(ptr4->data==n){
 					ptr5->nextedge=ptr4->nextedge;
 					free(ptr4);
@@ -200,7 +199,7 @@ int main(){
 	int x,y,v,i,j,s,q,k,l,m,n;
 	printf("\n\n*******Graph Implementation Using*******\n              Adjacency List\n\n\n");
 	while(1){
-		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Delete Vertex\n7.BFS\n8.Exit\n");
+		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Delete Vertex\n7.Breadth First Traversal\n8.Exit\n");
 		printf("\n\nEnter Selection: ");
 		scanf("%d",&s);
 	
@@ -248,19 +247,21 @@ int main(){
 				break;
 				
 			case 5:
-				printf("Enter Edge to be removed(v v): ");
+				printf("Enter Edge to be removed(v v): \n");
 				scanf("%d %d",&k,&l);
 				delete_edge(head,k,l);
+				printf("Edge removed Successfully\n");
 				break;
 			case 6:
 				printf("Enter vertex to be removed: ");
 				scanf("%d",&n);
 				delete_vertex(n);
+				printf("Vertex removed Successfully\n");
 				break;
 			case 7:
 				printf("Enter starting Edge: ");
 				scanf("%d",&m);
-				bfs(m);
+				BFT(m);
 				break;
 			case 8:
 				exit(0);
