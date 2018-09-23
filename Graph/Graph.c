@@ -150,6 +150,7 @@ void BFT(int n){
 				enqueue(ptr4->data);
 			}
 			ptr4=ptr4->nextedge;
+			statechange(ptr4->data);
 		}
 	}
 	printf("\n\n");	
