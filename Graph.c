@@ -156,11 +156,51 @@ void bfs(int n){
 }
 
 
+void delete_vertex(int n){
+	struct node_vertex *ptr=head;
+	struct node_vertex *ptr2;
+	if(ptr->data==n){
+		head=ptr->nextvertex;
+		
+	}else{
+		while(ptr->data!=n){
+			ptr2=ptr;
+			ptr=ptr->nextvertex;
+		}
+		ptr2->nextvertex=ptr->nextvertex;
+	}
+	free(ptr);
+	struct node_vertex *ptr3=head;
+	while(ptr3!=NULL){
+//		printf("bam!!!!");
+		struct node_edge *ptr4=ptr3->link;
+		struct node_edge *ptr5;
+		if(ptr4->data==n){
+			ptr3->link=ptr4->nextedge;
+			free(ptr4);
+		}else{
+			while(ptr4!=NULL){
+//				ptr5=ptr4;
+//				ptr4=ptr4->nextedge;
+				if(ptr4->data==n){
+					ptr5->nextedge=ptr4->nextedge;
+					free(ptr4);
+//					break;
+				}
+				ptr5=ptr4;
+				ptr4=ptr4->nextedge;	
+			}
+		}
+		ptr3=ptr3->nextvertex;
+	}	
+}
+
 
 int main(){
-	int x,y,v,i,j,s,q,k,l,m;
+	int x,y,v,i,j,s,q,k,l,m,n;
+	printf("\n\n*******Graph Implementation Using*******\n              Adjacency List\n\n\n");
 	while(1){
-		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.BFS\n7.Exit\n");
+		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Delete Vertex\n7.BFS\n8.Exit\n");
 		printf("\n\nEnter Selection: ");
 		scanf("%d",&s);
 	
@@ -213,11 +253,16 @@ int main(){
 				delete_edge(head,k,l);
 				break;
 			case 6:
+				printf("Enter vertex to be removed: ");
+				scanf("%d",&n);
+				delete_vertex(n);
+				break;
+			case 7:
 				printf("Enter starting Edge: ");
 				scanf("%d",&m);
 				bfs(m);
 				break;
-			case 7:
+			case 8:
 				exit(0);
 		}
 	}
