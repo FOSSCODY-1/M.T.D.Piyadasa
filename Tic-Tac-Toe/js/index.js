@@ -10,20 +10,32 @@ function winner(){
 		box9=document.getElementById("box9");
 
 	if(box1.innerHTML !== "" && box1.innerHTML===box2.innerHTML && box1.innerHTML === box3.innerHTML)
-		console.log("WIN");
+		selection(box1,box2,box3);
 	if(box4.innerHTML !== "" && box4.innerHTML===box5.innerHTML && box4.innerHTML === box6.innerHTML)
-		console.log("WIN");
+		selection(box4,box5,box6);
 	if(box7.innerHTML !== "" && box7.innerHTML===box8.innerHTML && box7.innerHTML === box9.innerHTML)
-		console.log("WIN");
+		selection(box7,box8,box9);
 	if(box1.innerHTML !== "" && box1.innerHTML===box4.innerHTML && box1.innerHTML === box7.innerHTML)
-		console.log("WIN");
+		selection(box1,box4,box7);
 	if(box2.innerHTML !== "" && box2.innerHTML===box5.innerHTML && box2.innerHTML === box8.innerHTML)
-		console.log("WIN");
+		selection(box2,box5,box8);
 	if(box3.innerHTML !== "" && box3.innerHTML===box6.innerHTML && box3.innerHTML === box9.innerHTML)
-		console.log("WIN");
+		selection(box3,box6,box9);
 	if(box1.innerHTML !== "" && box1.innerHTML===box5.innerHTML && box1.innerHTML === box9.innerHTML)
-		console.log("WIN");
+		selection(box1,box5,box9);
 	if(box7.innerHTML !== "" && box7.innerHTML===box5.innerHTML && box7.innerHTML === box3.innerHTML)
-		console.log("WIN");
+		selection(box7,box5,box3);
 
+}
+
+function selection(b1,b2,b3){
+	b1.style.background = "white";
+	b2.style.background = "white";
+	b3.style.background = "white";
+	if(b1.innerHTML==="X"){
+		turn.innerHTML="Player 1 won";
+	}else{
+		turn.innerHTML="Player 2 won";
+	}
+	// turn.innerHTML=turn.innerHTML.slice(0,8)+" won";
 }

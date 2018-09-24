@@ -1,35 +1,54 @@
 *{box-sizing: border-box;}
 
 body{
-	background: yellow;
+	background-image: url("../img/wood2.jpg");
+	background-color: #cccccc;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .canvas{
 	width: 300px;
 	overflow: hidden;
-	margin: 50px auto 0 auto;
+	margin: 80px auto 0 auto;
 }
 .canvas .box{
 	float: left;
 	width: 100px;
 	height: 100px;
-	border: 1px solid #000;
+	border: 3px solid #00bfff;
 	transition: all .25s ease-in-out;
 	font-family: sans-serif;
 	font-size: 85px;
 	text-align: center;
 	line-height: 100px;
 	cursor: pointer;
+	background:transparent;
 }
 .canvas .box:hover{background: rgba(173,216,230,1)}
 
+.canvas span{
+	background: transparent;
+	border: 1px solid black;
+	margin: 10px auto;
+	height: 40px;
+	width: 100%;
+	display: block;
+	text-align: center;
+	font-family: sans-serif;
+	color: #000;
+	font-weight: bold;
+	font-size: 20px;
+}
+
 button{
 	font-weight: bold;  
-	width: 140px;
+	width: 160px;
 	height: 50px;
 	font-size: 20px;
 	display: block;
-	background: rgba(173,216,230,1);
+	background-color: transparent;
 	margin: 10px auto;
-	border: 1px solid black;  
+	border: 1px solid black; 
+	cursor: pointer; 
 }
