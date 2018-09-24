@@ -195,12 +195,50 @@ void delete_vertex(int n){
 	}	
 }
 
+//Depth First Traversal
+
+void DFT(int a){
+	struct node_vertex *ptr=head;
+	struct node_edge *preptr;
+	while(ptr->data!=a){
+		ptr=ptr->nextvertex;
+	}
+	statechange(ptr->data);
+	preptr=ptr->link;
+	printf("DFT: ");
+	while(preptr!=NULL){
+		if(preptr->status==0){
+			visit(preptr->data);
+		}
+		preptr=preptr->nextedge;
+	}
+	printf("%d ",a);
+}
+
+// Recursive function for DFT
+
+int visit(int b){
+	statechange(b);
+	struct node_vertex *ptr=head;
+	while(ptr->data!=b){
+		ptr=ptr->nextvertex;
+	}
+	struct node_edge *preptr=ptr->link;
+	while(preptr!=NULL){
+		if(preptr->status==0){
+			visit(preptr->data);
+		}
+		preptr=preptr->nextedge;
+	}
+	printf("%d ",b);
+}
+
 
 int main(){
-	int x,y,v,i,j,s,q,k,l,m,n;
+	int x,y,v,i,j,s,q,k,l,m,n,o;
 	printf("\n\n*******Graph Implementation Using*******\n              Adjacency List\n\n\n");
 	while(1){
-		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Delete Vertex\n7.Breadth First Traversal\n8.Exit\n");
+		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Delete Vertex\n7.Breadth First Traversal\n8.Depth First Traversal\n9.Exit\n");
 		printf("\n\nEnter Selection: ");
 		scanf("%d",&s);
 	
@@ -260,12 +298,22 @@ int main(){
 				printf("Vertex removed Successfully\n");
 				break;
 			case 7:
-				printf("Enter starting Edge: ");
+				printf("Enter starting Vertex: ");
 				scanf("%d",&m);
 				BFT(m);
 				break;
 			case 8:
+				printf("Enter starting Vertex: ");
+				scanf("%d",&o);
+				DFT(o);
+				printf("\n\n");
+				break;
+			case 9:
 				exit(0);
+				break;
+			default:
+				printf("Invalid Selection");
+				break;
 		}
 	}
 	
