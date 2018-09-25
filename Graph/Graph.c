@@ -257,43 +257,47 @@ int visit(int b){
 
 int main(){
 	int x,y,v,i,j,s,q,k,l,m,n,o;
-	printf("\n\n*******Graph Implementation Using*******\n              Adjacency List\n\n\n");
+	printf("\n                    *******Graph Implementation Using*******\n                                  Adjacency List\n\n\n");
+	printf("     >>>>>Let's Create a Graph<<<<<\n\n");
+	printf("Enter the number of vertices: ");
+	scanf("%d",&v);
+	for(i=1;i<=v;i++){
+		head=create_v(head,i);
+	}
 	while(1){
-		printf("\n1.Create Graph\n2.Display Graph\n3.Add New vertex\n4.Add New Edge\n5.Delete Edge\n6.Delete Vertex\n7.Breadth First Traversal\n8.Depth First Traversal\n9.Exit\n");
+		printf("Enter edge v1--->v2(enter 0 0 to end): ");
+		scanf("%d %d",&x,&y);
+		if(x==0||y==0){
+			break;
+		}else{
+			create_e(head,x,y);
+		}
+
+	}
+	printf("\nGraph Created Successfully\n\n");
+				
+
+	while(1){
+		printf("\n\n\n     >>>>>Select Option<<<<<\n");
+		printf(" _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ");
+		printf("\n|1.Display Graph              |\n|2.Add New vertex             |\n|3.Add New Edge               |\n|4.Delete Edge                |\n|5.Delete Vertex              |\n|6.Breadth First Traversal    |\n|7.Depth First Traversal      |\n|8.Exit                       |\n");
+		printf("|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _|");
 		printf("\n\nEnter Selection: ");
 		scanf("%d",&s);
 	
 	
 		switch(s){
 			case 1:
-				printf("Enter the number of vertices: ");
-				scanf("%d",&v);
-				for(i=1;i<=v;i++){
-					head=create_v(head,i);
-				}
-				while(1){
-					printf("Enter edge v1--->v2(enter 0 0 to end): ");
-					scanf("%d %d",&x,&y);
-					if(x==0||y==0){
-						break;
-					}else{
-						create_e(head,x,y);
-					}
-		
-				}
-				printf("Graph Created Successfully\n\n");
-				break;
-			case 2:
 				printf("\n\n");
 				print(head);
 				printf("\n\n");
 				break;
-			case 3:
+			case 2:
 				printf("\nEnter Value: ");
 				scanf("%d",&q);
 				head=create_v(head,q);
 				break;
-			case 4:
+			case 3:
 				while(1){
 					printf("Enter New Edge v1 v2(enter 0 0 to end): ");
 					scanf("%d %d",&x,&y);
@@ -306,30 +310,30 @@ int main(){
 				}
 				break;
 				
-			case 5:
+			case 4:
 				printf("Enter Edge to be removed(v v): \n");
 				scanf("%d %d",&k,&l);
 				delete_edge(head,k,l);
 				printf("Edge removed Successfully\n");
 				break;
-			case 6:
+			case 5:
 				printf("Enter vertex to be removed: ");
 				scanf("%d",&n);
 				delete_vertex(n);
 				printf("Vertex removed Successfully\n");
 				break;
-			case 7:
+			case 6:
 				printf("Enter starting Vertex: ");
 				scanf("%d",&m);
 				BFT(m);
 				break;
-			case 8:
+			case 7:
 				printf("Enter starting Vertex: ");
 				scanf("%d",&o);
 				DFT(o);
 				printf("\n\n");
 				break;
-			case 9:
+			case 8:
 				exit(0);
 				break;
 			default:

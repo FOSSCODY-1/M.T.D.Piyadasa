@@ -34,8 +34,26 @@ function selection(b1,b2,b3){
 	b3.style.background = "white";
 	if(b1.innerHTML==="X"){
 		turn.innerHTML="Player 1 won";
+		var boxes = document.querySelectorAll("#main div");
+		for(var i=0; i < boxes.length ;i++){
+			boxes[i].onclick=function(){
+				if(this.innerHTML!==" X"&&this.innerHTML!=="O"){
+					this.innerHTML=" ";
+				}
+			}
+
+		}
 	}else{
 		turn.innerHTML="Player 2 won";
+		var boxes = document.querySelectorAll("#main div");
+		for(var i=0; i < boxes.length ;i++){
+			boxes[i].onclick=function(){
+				if(this.innerHTML!==" X"&&this.innerHTML!=="O"){
+					this.innerHTML=" ";
+				}
+			}
+
+		}
 	}
 	// turn.innerHTML=turn.innerHTML.slice(0,8)+" won";
 }
