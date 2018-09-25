@@ -37,6 +37,9 @@
 						turn.innerHTML="Player 2's turn";
 						winner();
 						value++;
+						if(value===9){
+							turn.innerHTML="DRAW";
+						}
 					}else{
 						console.log(value);
 						this.innerHTML="O";

@@ -34,6 +34,7 @@ function selection(b1,b2,b3){
 	b3.style.background = "white";
 	if(b1.innerHTML==="X"){
 		turn.innerHTML="Player 1 won";
+		value++;
 		var boxes = document.querySelectorAll("#main div");
 		for(var i=0; i < boxes.length ;i++){
 			boxes[i].onclick=function(){
@@ -45,6 +46,7 @@ function selection(b1,b2,b3){
 		}
 	}else{
 		turn.innerHTML="Player 2 won";
+		value++;
 		var boxes = document.querySelectorAll("#main div");
 		for(var i=0; i < boxes.length ;i++){
 			boxes[i].onclick=function(){
