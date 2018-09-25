@@ -100,7 +100,24 @@ void delete_edge(struct node_vertex *ptr,int x,int y){
 	free(preptr);	
 }
 
-//Function to mark the identified nodes in Breadth First Traversal
+
+//Function to mark the initial status of all nodes before Traversal (init=0)
+
+void initiate(struct node_vertex *ptr){
+	struct node_edge *edge;
+	while(ptr!=NULL){
+		ptr->status=0;
+		edge=ptr->link;
+		ptr=ptr->nextvertex;
+		while(edge!=NULL){
+			edge->status=0;
+			edge=edge->nextedge;
+		}	
+	}
+}
+
+
+//Function to mark the identified nodes in Traversal (state=1)
 
 int statechange(int m){
 	struct node_vertex *ptr=head;
@@ -120,6 +137,7 @@ int statechange(int m){
 //Breadth First Traversal
 
 void BFT(int n){
+	initiate(head);
 	int a;
 	struct node_vertex *ptr=head;
 	struct node_edge *ptr2;
@@ -185,7 +203,6 @@ void delete_vertex(int n){
 				if(ptr4->data==n){
 					ptr5->nextedge=ptr4->nextedge;
 					free(ptr4);
-//					break;
 				}
 				ptr5=ptr4;
 				ptr4=ptr4->nextedge;	
@@ -195,9 +212,11 @@ void delete_vertex(int n){
 	}	
 }
 
+
 //Depth First Traversal
 
 void DFT(int a){
+	initiate(head);
 	struct node_vertex *ptr=head;
 	struct node_edge *preptr;
 	while(ptr->data!=a){
@@ -232,6 +251,8 @@ int visit(int b){
 	}
 	printf("%d ",b);
 }
+
+//Main function
 
 
 int main(){
@@ -321,22 +342,3 @@ int main(){
 
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
