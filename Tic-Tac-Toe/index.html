@@ -21,35 +21,13 @@
 		
 	</div>
 
-	<button onclick="location.href=location.href">PLAY AGAIN</button>
+	<button onclick="location.href=location.href">PLAY AGAIN</button>   <!--Play again button that reloads the page-->
 
 	<script>
 		var turn=document.getElementById("turn");
 		var boxes = document.querySelectorAll("#main div");
 		var  value = 0;
-
-		for(var i=0; i < boxes.length ;i++){
-			boxes[i].onclick=function(){
-				if(this.innerHTML!=="X" && this.innerHTML!=="O"){
-					if (value%2===0) {
-						console.log(value);
-						this.innerHTML = "X";
-						turn.innerHTML="Player 2's turn";
-						winner();
-						value++;
-						if(value===9){
-							turn.innerHTML="DRAW";
-						}
-					}else{
-						console.log(value);
-						this.innerHTML="O";
-						turn.innerHTML="Player 1's turn";
-						winner();
-						value++;
-					}
-				}
-			};
-		}
+		game();
 	</script>
 
 </body>

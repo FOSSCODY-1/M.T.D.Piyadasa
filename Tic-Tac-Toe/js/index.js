@@ -1,3 +1,33 @@
+//Main function of the game
+
+function game(){	                                             //Selects all the boxes and marks each box with the 
+	for(var i=0; i < boxes.length ;i++){						 //respective mark "X" or "Y" depending on the previous 
+		boxes[i].onclick=function(){							 //player's mark
+			if(this.innerHTML!=="X" && this.innerHTML!=="O"){
+				if (value%2===0) {
+					console.log(value);
+					this.innerHTML = "X";
+					turn.innerHTML="Player 2's turn";
+					winner();									//Calls winner function each time a player marks a box
+					value++;									// to see if he he is the winner
+					if(value===9){								//Instructor outputs draw if all the boxes are filled 
+						turn.innerHTML="DRAW";					//without a winner
+					}
+				}else{
+					console.log(value);
+					this.innerHTML="O";
+					turn.innerHTML="Player 1's turn";
+					winner();
+					value++;
+				}
+			}
+		};
+	}
+}
+
+//Function to check if the necessary conditions are satisfied for a player to win
+
+
 function winner(){
 	var box1=document.getElementById("box1"),
 		box2=document.getElementById("box2"),
@@ -28,6 +58,8 @@ function winner(){
 
 }
 
+//Function to highlight the winnig boxes and output the player who won
+
 function selection(b1,b2,b3){
 	b1.style.background = "white";
 	b2.style.background = "white";
@@ -57,5 +89,5 @@ function selection(b1,b2,b3){
 
 		}
 	}
-	// turn.innerHTML=turn.innerHTML.slice(0,8)+" won";
 }
+
