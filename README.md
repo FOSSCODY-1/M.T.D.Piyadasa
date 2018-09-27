@@ -1,6 +1,6 @@
 1.Graph implementation using C 
-  Graph is Implemented with adjacency list representation.
   
+  Graph is Implemented with adjacency list representation.
   Functionalities:1. Create a Graph
                   2. Display the Graph
                   3. Add New Vertex
