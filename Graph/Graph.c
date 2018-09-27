@@ -91,7 +91,7 @@ void print(struct node_vertex *ptr){                //ptr-Pointer to the startin
 			printf("%d  ",edge->data);
 			edge=edge->nextedge;
 		}printf("\n");
-		printf("------------------------\n");
+		printf("---------------------------\n");
 		
 	}
 	
@@ -223,9 +223,12 @@ void delete_vertex(int n){					 //n-vertex to be deleted
 				if(ptr4->data==n){
 					ptr5->nextedge=ptr4->nextedge;
 					free(ptr4);
+					break;
 				}
-				ptr5=ptr4;
-				ptr4=ptr4->nextedge;	
+				else{
+					ptr5=ptr4;
+					ptr4=ptr4->nextedge;
+				}	
 			}
 		}
 		ptr3=ptr3->nextvertex;
@@ -300,7 +303,7 @@ int main(){
 	while(1){
 		printf("\n\n\n     >>>>>Select Option<<<<<\n");
 		printf(" _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ");
-		printf("\n|1.Display Graph              |\n|2.Add New vertex             |\n|3.Add New Edge               |\n|4.Delete Edge                |\n|5.Delete Vertex              |\n|6.Breadth First Traversal    |\n|7.Depth First Traversal      |\n|8.Exit                       |\n");
+		printf("\n|1.Display Graph              |\n|2.Add New Vertex             |\n|3.Add New Edge               |\n|4.Delete Edge                |\n|5.Delete Vertex              |\n|6.Breadth First Traversal    |\n|7.Depth First Traversal      |\n|8.Exit                       |\n");
 		printf("|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _|");
 		printf("\n\nEnter Selection: ");
 		scanf("%d",&s);
@@ -331,7 +334,7 @@ int main(){
 				break;
 				
 			case 4:
-				printf("Enter Edge to be removed(v v): \n");
+				printf("Enter Edge to be removed(v v): ");
 				scanf("%d %d",&k,&l);
 				delete_edge(head,k,l);
 				printf("Edge removed Successfully\n");
