@@ -9,6 +9,7 @@
                   6. Delete Edge
                   7. Depth First Traversal
                   8. Breadth First Traversal
+                  
 
 
 2.Simple Tic-Tac-Toe game implementation using HTML5 and Javascript
