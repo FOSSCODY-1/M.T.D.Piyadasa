@@ -319,6 +319,7 @@ int main(){
 				printf("\nEnter Value: ");
 				scanf("%d",&q);
 				head=create_v(head,q);
+				printf("Vertex added successfully!");
 				break;
 			case 3:
 				while(1){
