@@ -23,22 +23,22 @@ struct node_vertex *head=NULL;        //Starting vertex
 
 //Function Declaration
 
-struct node_vertex *create_v(struct node_vertex*,int);
-struct node_edge *create_e(struct node_vertex*,int ,int);
-void print(struct node_vertex*);
-void delete_edge(struct node_vertex*,int,int);
-void delete_vertex(int);
-void initiate(struct node_vertex*);
-int statechange(int);
-void BFT(int);
-void DFT(int);
-int visit(int);
+struct node_vertex *create_v(struct node_vertex*,int);         //Creates a vertex
+struct node_edge *create_e(struct node_vertex*,int ,int);	   //Creates an edge
+void print(struct node_vertex*);							   //Prints the graph
+void delete_edge(struct node_vertex*,int,int);				   //Deletes an edge
+void delete_vertex(int);									   //Deletes a vertex
+void initiate(struct node_vertex*);							   //Marks the status of all the nodes as 0(Not discovered)
+int statechange(int);										   //Changes the status of a particular node to 1(discovered)
+void BFT(int);												   //Breadth First Traversal
+void DFT(int);												   //Depth First Traversal
+int visit(int);												   //Recursive function for DFST	
 
 
 //Function to create a vertex
 
 struct node_vertex *create_v(struct node_vertex* ptr,int m){                 //ptr-Starting vertex(head),m-Vertex value
-	if(ptr==NULL){															//Adding the first vertex
+	if(ptr==NULL){															 //Adding the first vertex
 		struct node_vertex *newvertex;
 		newvertex=(struct node_vertex*)malloc(sizeof(struct node_vertex));
 		newvertex->data=m;
@@ -54,12 +54,12 @@ struct node_vertex *create_v(struct node_vertex* ptr,int m){                 //p
 
 //Function to create an edge
 
-struct node_edge *create_e(struct node_vertex *ptr,int x,int y){    //ptr- Pointer to the starting vertex,x-Source vertex,y-Destination vertex
-	while(ptr->data!=x){                             //Locate vertex x
+struct node_edge *create_e(struct node_vertex *ptr,int x,int y){    	//ptr- Pointer to the starting vertex,x-Source vertex,y-Destination vertex
+	while(ptr->data!=x){                             					//Locate vertex x
 		ptr=ptr->nextvertex;
 	}
 	struct node_edge *edge=ptr->link;
-	if(edge!=NULL){									//If vertex has edges, Locate the end point
+	if(edge!=NULL){														//If vertex has edges, Locate the end point
 		while(edge->nextedge!=NULL){
 			edge=edge->nextedge;
 		}
@@ -101,15 +101,15 @@ void print(struct node_vertex *ptr){                //ptr-Pointer to the startin
 //Function to delete an edge
 
 void delete_edge(struct node_vertex *ptr,int x,int y){      //x-Source vertex    y-Destination vertex
-	while(ptr->data!=x){                       //Locate the first vertex(source of the edge)
+	while(ptr->data!=x){                       				//Locate the first vertex(source of the edge)
 		ptr=ptr->nextvertex;
 	}
 	struct node_edge *preptr=ptr->link;
 	struct node_edge *postptr;
-	if(preptr->data==y){                       //If the destination vertex is the first edge of the source vertex
+	if(preptr->data==y){                       				//If the destination vertex is the first edge of the source vertex
 		ptr->link=NULL;
 	}else{
-		while(preptr->data!=y){				   //else locate the destination vertex
+		while(preptr->data!=y){				   				//else locate the destination vertex
 			postptr=preptr;
 			preptr=preptr->nextedge;
 		}
@@ -156,11 +156,11 @@ int statechange(int m){							  // m- Starting vertex
 //Breadth First Traversal
 
 void BFT(int n){						// n-Starting vertex
-	initiate(head);                    //Marks all nodes as undiscovered(status=0)
+	initiate(head);                     //Marks all nodes as undiscovered(status=0)
 	int a;
 	struct node_vertex *ptr=head;
 	struct node_edge *ptr2;
-	while(ptr->data!=n){			   //Locates the starting vertex
+	while(ptr->data!=n){			    //Locates the starting vertex
 		ptr=ptr->nextvertex;
 	}
 	ptr->status=1;						//Update the status of the starting vertex as 1
@@ -197,21 +197,21 @@ void BFT(int n){						// n-Starting vertex
 
 //Function to delete a vertex
 
-void delete_vertex(int n){					 //n-vertex to be deleted
+void delete_vertex(int n){								//n-vertex to be deleted
 	struct node_vertex *ptr=head;
 	struct node_vertex *ptr2;
-	if(ptr->data==n){					     //If the vertex to be deleted id the first vertex
+	if(ptr->data==n){					    		    //If the vertex to be deleted id the first vertex
 		head=ptr->nextvertex;
 		
-	}else{									 //Else search for the vertex and make the previous vertex point to the 
-		while(ptr->data!=n){				 //vertex after the vertex to be removed
+	}else{									 			//Else search for the vertex and make the previous vertex point to the 
+		while(ptr->data!=n){				 			//vertex after the vertex to be removed
 			ptr2=ptr;
 			ptr=ptr->nextvertex;
 		}
 		ptr2->nextvertex=ptr->nextvertex;
 	}
-	free(ptr);								 //Free the vertex from memory
-	struct node_vertex *ptr3=head;				
+	free(ptr);								 			//Free the vertex from memory
+	struct node_vertex *ptr3=head;						
 	while(ptr3!=NULL){									//Locate all the vertices connected to the deleted node
 		struct node_edge *ptr4=ptr3->link;				//delete and free them from memory
 		struct node_edge *ptr5;
