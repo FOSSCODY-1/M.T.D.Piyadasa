@@ -46,7 +46,11 @@ struct node_vertex *create_v(struct node_vertex* ptr,int m){                 //p
 		newvertex->link=NULL;
 		return newvertex;
 	}else{
-		ptr->nextvertex=create_v(ptr->nextvertex,m);
+		if(ptr->data==m){
+			return ptr;
+		}else{
+			ptr->nextvertex=create_v(ptr->nextvertex,m);
+		}
 	}
 	
 }
@@ -155,20 +159,20 @@ int statechange(int m){							  // m- Starting vertex
 
 //Breadth First Traversal
 
-void BFT(int n){						// n-Starting vertex
-	initiate(head);                     //Marks all nodes as undiscovered(status=0)
+void BFT(int n){								// n-Starting vertex
+	initiate(head);                     		//Marks all nodes as undiscovered(status=0)
 	int a;
 	struct node_vertex *ptr=head;
 	struct node_edge *ptr2;
-	while(ptr->data!=n){			    //Locates the starting vertex
+	while(ptr->data!=n){			   		    //Locates the starting vertex
 		ptr=ptr->nextvertex;
 	}
-	ptr->status=1;						//Update the status of the starting vertex as 1
-	enqueue(ptr->data);					//Add the starting vertex to the queue
-	statechange(ptr->data);				//Locate each vertex with the starting vertex value and update its status to 1
+	ptr->status=1;								//Update the status of the starting vertex as 1
+	enqueue(ptr->data);							//Add the starting vertex to the queue
+	statechange(ptr->data);						//Locate each vertex with the starting vertex value and update its status to 1
 	ptr2=ptr->link;
-	while(ptr2!=NULL){					//Enqueue all the vertices connected to the starting vertex and
-		ptr2->status=1;					//Update their status to 1 in the whole graph
+	while(ptr2!=NULL){							//Enqueue all the vertices connected to the starting vertex and
+		ptr2->status=1;							//Update their status to 1 in the whole graph
 		enqueue(ptr2->data);
 		statechange(ptr2->data);
 		ptr2=ptr2->nextedge;
