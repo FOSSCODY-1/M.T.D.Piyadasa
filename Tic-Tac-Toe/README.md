@@ -1,4 +1,4 @@
-# Tic-Tac-Toe gameplay #
+# Tic-Tac-Toe #
 
 
 ## How to run the game ##
