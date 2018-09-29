@@ -43,3 +43,7 @@
 ## Demo Video
 
 [Tic-Tac-Toe Demo](https://vimeo.com/292278589)
+
+## Play Online
+
+[Play Online](https://tictactoe-demo.000webhostapp.com/)
